@@ -8,7 +8,7 @@ class MIRACLReranking(AbsTaskReranking):
     def description(self):
         return {
             'name': 'MIRACL',
-            'hf_hub_name': 'jinaai/miracl-es',
+            'hf_hub_name': 'jinaai/miracl',
             'reference': 'https://project-miracl.github.io/',
             'description': (
                 'MIRACL (Multilingual Information Retrieval Across a Continuum of Languages) is a multilingual '

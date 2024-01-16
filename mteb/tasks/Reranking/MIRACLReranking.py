@@ -1,3 +1,5 @@
+import datasets
+
 from mteb.abstasks.AbsTaskReranking import AbsTaskReranking
 
 
@@ -20,3 +22,16 @@ class MIRACLReranking(AbsTaskReranking):
             'main_score': 'map',
             'revision': '',
         }
+
+    def load_data(self, **kwargs):
+        """
+        Load dataset from HuggingFace hub
+        """
+        if self.data_loaded:
+            return
+
+        # TODO: add split argument
+        self.dataset = datasets.load_dataset(
+            self.description["hf_hub_name"], 'es', revision=self.description.get("revision", None)
+        )
+        self.data_loaded = True

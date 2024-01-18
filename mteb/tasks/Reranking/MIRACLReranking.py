@@ -30,8 +30,9 @@ class MIRACLReranking(AbsTaskReranking):
         if self.data_loaded:
             return
 
-        # TODO: add split argument
         self.dataset = datasets.load_dataset(
-            self.description["hf_hub_name"], 'es', revision=self.description.get("revision", None)
+            self.description["hf_hub_name"],
+            self.description['eval_lags'][0],
+            revision=self.description.get("revision", None),
         )
         self.data_loaded = True

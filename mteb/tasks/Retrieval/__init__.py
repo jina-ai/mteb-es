@@ -40,3 +40,4 @@ from .TRECCOVIDPLRetrieval import *
 from .NarrativeQARetrieval import *
 from .SpanishPassageRetrievalS2S import *
 from .SpanishPassageRetrievalS2P import *
+from .XMarketESRetrieval import *

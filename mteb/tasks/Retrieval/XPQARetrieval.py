@@ -7,7 +7,7 @@ _EVAL_SPLIT = "test"
 _LANGS = ["ar", "de", "es", "fr", "hi", "it", "ja", "ko", "pl", "pt", "ta", "zh"]
 
 
-def _load_xpqa_data(path: str, langs: list, split: str, cache_dir: str=None, revision: str=None):
+def _load_xpqa_data(path: str, langs: list, split: str, cache_dir: str = None, revision: str = None):
     queries = {lang: {split: {}} for lang in langs}
     corpus = {lang: {split: {}} for lang in langs}
     relevant_docs = {lang: {split: {}} for lang in langs}
@@ -30,7 +30,7 @@ def _load_xpqa_data(path: str, langs: list, split: str, cache_dir: str=None, rev
             queries[lang][split][query_id] = question
             doc_id = f"D{answer_ids[answer]}"
             corpus[lang][split][doc_id] = {"text": answer}
-            if query_id not in relevant_docs:
+            if query_id not in relevant_docs[lang][split]:
                 relevant_docs[lang][split][query_id] = {}
             relevant_docs[lang][split][query_id][doc_id] = 1
 
@@ -62,11 +62,11 @@ class XPQARetrieval(MultilingualTask, AbsTaskRetrieval):
             return
 
         self.corpus, self.queries, self.relevant_docs = _load_xpqa_data(
-            path=self.description['hf_hub_name'],
+            path=self.description["hf_hub_name"],
             langs=self.langs,
-            split=self.description['eval_splits'][0],
-            cache_dir=kwargs.get('cache_dir', None),
-            revision=self.description['revision'],
+            split=self.description["eval_splits"][0],
+            cache_dir=kwargs.get("cache_dir", None),
+            revision=self.description["revision"],
         )
 
         self.data_loaded = True
